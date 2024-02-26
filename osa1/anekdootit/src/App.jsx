@@ -19,11 +19,8 @@ const App = () => {
       return holder
     })
   )
-  const [anecdoteIndexWithMostScores, setIndexWithMostScores] = useState(0)
+  const [anectodeIndexWithMostScores, setIndexWithMostScores] = useState(0)
 
-  let anectodeIndexWithMostScores = Object.keys(anecdoteScores).reduce(
-    function(a, b){ return anecdoteScores[a] > anecdoteScores[b] ? a : b }
-  );
     
   const nextAnecdote = () => {
     const selection = Math.floor(Math.random()*anecdotes.length)
@@ -38,7 +35,7 @@ const App = () => {
       function(a, b){ return anecdoteScores[a] > anecdoteScores[b] ? a : b }
     ))
   }
-
+  
   return (
     <div>
       <h1>Anecdote of the day</h1>
