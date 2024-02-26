@@ -1,4 +1,5 @@
-import { useState } from 'react'
+import { useState, useEffect} from 'react'
+import axios from 'axios'
 import AddNewContact from './AddNewContact'
 import Numbers from './Numbers'
 import Phonebook from './Phonebook'
@@ -16,6 +17,18 @@ const App = () => {
   const [newNumber, setNewNumber] = useState('')
 
   const [searchNumber, setSearchNumber] = useState('')
+
+  useEffect(() => {    
+    console.log('effect')    
+    axios      
+      .get('http://localhost:3001/persons')      
+      .then(response => {        
+        console.log('promise fulfilled')        
+        setPersons(response.data)      
+      })  
+  }, [])  
+  console.log('render', persons.length, 'notes')
+
 
   return (
     <div>
