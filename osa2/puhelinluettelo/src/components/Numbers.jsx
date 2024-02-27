@@ -1,4 +1,4 @@
-import phonebookService from './services/PhonebookService'
+import phonebookService from '../services/PhonebookService'
 
 const Numbers = ({searchNumber, persons, setPersons}) => {
     const foundPersons = persons.filter(person => 
@@ -18,12 +18,12 @@ const Numbers = ({searchNumber, persons, setPersons}) => {
     } 
     console.log(foundPersons)
     return (
-        <div>
+        <div className='container'>
             <h1>Numbers</h1>
             <ul>
                 {
                     foundPersons.map((person) =>
-                        <li key={person["id"]}>
+                        <li key={person["id"]} className="note">
                             {person["name"]} {person["number"]}
                             <button onClick={() => deletePerson(person["id"])}>delete</button>
                         </li>

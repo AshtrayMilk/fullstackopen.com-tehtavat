@@ -1,4 +1,4 @@
-import phonebookService from './services/PhonebookService'
+import phonebookService from '../services/PhonebookService'
 
 const AddNewContact = ({
     newName,
@@ -35,7 +35,7 @@ const AddNewContact = ({
                     .updatePerson(id, contact)
                     .then(response => {
                         console.log("response", response)
-                        setPersons(persons.concat(response))
+                        setPersons(persons.map(person => person.id !== id ? person : response))
                         setNewName("")
                         setNewNumber("")
                 })
@@ -57,7 +57,7 @@ const AddNewContact = ({
         
     }
     return (
-        <div>
+        <div className="container">
            <h2>add a new</h2>
            <form onSubmit={addNewPersonToContacts}>
                 <div>name: <input onChange={updateNewName}/></div>

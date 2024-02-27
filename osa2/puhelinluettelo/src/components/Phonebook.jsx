@@ -7,7 +7,7 @@ const Phonebook = ({
         setSearchNumber(event.target.value)  
     }
     return (
-        <div>
+        <div className="container">
             <h1>Phonebook</h1>
             <p>Filter shown with</p>
             <input onChange={handleUpdateFilter}></input>

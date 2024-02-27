@@ -1,8 +1,8 @@
 import { useState, useEffect} from 'react'
 import axios from 'axios'
-import AddNewContact from './AddNewContact'
-import Numbers from './Numbers'
-import Phonebook from './Phonebook'
+import AddNewContact from './components/AddNewContact'
+import Numbers from './components/Numbers'
+import Phonebook from './components/Phonebook'
 
 const App = () => {
 

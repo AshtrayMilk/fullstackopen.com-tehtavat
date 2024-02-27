@@ -1,11 +1,6 @@
 {
   "persons": [
     {
-      "id": "5778",
-      "name": "dsf",
-      "number": "asdf"
-    },
-    {
       "id": "2fda",
       "name": "kukkakauppias",
       "number": "Elelelelele"
@@ -16,18 +11,8 @@
       "number": ""
     },
     {
-      "id": "e7b7",
-      "name": "monke brain",
-      "number": ""
-    },
-    {
       "id": "0824",
       "name": "dddd",
-      "number": ""
-    },
-    {
-      "id": "54c9",
-      "name": "",
       "number": ""
     },
     {
@@ -37,7 +22,7 @@
     },
     {
       "name": "kekkonen",
-      "number": "kukkakauppias",
+      "number": "jumalauta",
       "id": "9090"
     }
   ]
