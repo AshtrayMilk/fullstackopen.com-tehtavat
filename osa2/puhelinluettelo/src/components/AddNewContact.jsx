@@ -6,7 +6,9 @@ const AddNewContact = ({
     setNewName,
     setNewNumber,
     persons,
-    setPersons
+    setPersons,
+    addingMessage, 
+    setAddingMessage
 }) => {
     const updateNewName = (event) => {
         setNewName(event.target.value)
@@ -54,6 +56,11 @@ const AddNewContact = ({
                     setNewNumber("")
             })
         }
+        setAddingMessage(`Person has been added/renamed in your contacts`)
+        
+        setTimeout(() => {
+        setAddingMessage(null)
+        }, 5000)
         
     }
     return (

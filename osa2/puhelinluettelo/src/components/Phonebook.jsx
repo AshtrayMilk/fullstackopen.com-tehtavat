@@ -1,5 +1,7 @@
+import Notification from './Notification'
 const Phonebook = ({
-    setSearchNumber
+    setSearchNumber,
+    addingMessage
 }) => {
 
     const handleUpdateFilter = (event) => {    
@@ -11,6 +13,7 @@ const Phonebook = ({
             <h1>Phonebook</h1>
             <p>Filter shown with</p>
             <input onChange={handleUpdateFilter}></input>
+            <Notification message={addingMessage} />
         </div>
     )
 }

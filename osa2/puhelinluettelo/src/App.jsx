@@ -14,6 +14,7 @@ const App = () => {
   const [newNumber, setNewNumber] = useState('')
 
   const [searchNumber, setSearchNumber] = useState('')
+  const [addingMessage, setAddingMessage] = useState(Null)
 
   useEffect(() => {    
     console.log('effect')    
@@ -31,6 +32,7 @@ const App = () => {
     <div>
       <Phonebook 
         setSearchNumber={setSearchNumber}
+        addingMessage={addingMessage}
       />
       <AddNewContact
         newName={newName}
@@ -39,6 +41,8 @@ const App = () => {
         setNewNumber={setNewNumber}
         persons={persons}
         setPersons={setPersons}
+        addingMessage={addingMessage}
+        setAddingMessage={setAddingMessage}
       />
       <Numbers
         searchNumber={searchNumber}
