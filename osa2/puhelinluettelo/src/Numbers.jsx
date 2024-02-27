@@ -1,15 +1,32 @@
-const Numbers = ({searchNumber, persons}) => {
+import phonebookService from './services/PhonebookService'
+
+const Numbers = ({searchNumber, persons, setPersons}) => {
     const foundPersons = persons.filter(person => 
         person["name"].toLowerCase().includes(searchNumber.toLowerCase())
     )
+    const deletePerson = (target) => {
+        console.log("target", target)
+        if(window.confirm("Do you really wanna delete?")){
+            phonebookService
+            .deletePerson(target)
+            .then(response => {
+                console.log("response", response)
+                setPersons(persons.filter(person => person.id != target))
+        })
+        }
+        
+    } 
     console.log(foundPersons)
     return (
         <div>
             <h1>Numbers</h1>
             <ul>
                 {
-                    foundPersons.map((person, index) =>
-                        <li key={index+person["name"]}>{person["name"]} {person["number"]}</li>
+                    foundPersons.map((person) =>
+                        <li key={person["id"]}>
+                            {person["name"]} {person["number"]}
+                            <button onClick={() => deletePerson(person["id"])}>delete</button>
+                        </li>
                     )
                 }
             </ul> 

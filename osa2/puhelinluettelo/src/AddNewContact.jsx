@@ -1,3 +1,5 @@
+import phonebookService from './services/PhonebookService'
+
 const AddNewContact = ({
     newName,
     newNumber,
@@ -21,13 +23,36 @@ const AddNewContact = ({
                 isAlreadyOnContacts = true
             }
         })
+
         if(isAlreadyOnContacts){
-            alert(`${newName} already added to phonebook`)
+            if(window.confirm(`${newName} already added to phonebook, replace the number with a new one?`)){
+                let contact = ({"name": newName, "number": newNumber })
+                let id = persons.filter(person => person["name"].toLowerCase() == newName.toLowerCase())[0].id
+                console.log("id",id)
+                console.log("contact",contact)
+
+                phonebookService
+                    .updatePerson(id, contact)
+                    .then(response => {
+                        console.log("response", response)
+                        setPersons(persons.concat(response))
+                        setNewName("")
+                        setNewNumber("")
+                })
+            }
         }else{
-            let updatedContacts = persons
-            updatedContacts.push({"name": newName, "number": newNumber})
-            console.log(updatedContacts)
-            setPersons[updatedContacts] 
+            let contact = ({"name": newName, "number": newNumber })
+
+            console.log("contact",contact)
+
+            phonebookService
+                .createPerson(contact)
+                .then(response => {
+                    console.log("response", response)
+                    setPersons(persons.concat(response))
+                    setNewName("")
+                    setNewNumber("")
+            })
         }
         
     }
