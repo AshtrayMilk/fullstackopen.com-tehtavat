@@ -14,12 +14,12 @@ const App = () => {
   const [newNumber, setNewNumber] = useState('')
 
   const [searchNumber, setSearchNumber] = useState('')
-  const [addingMessage, setAddingMessage] = useState(Null)
+  const [addingMessage, setAddingMessage] = useState(null)
 
   useEffect(() => {    
     console.log('effect')    
     axios      
-      .get('http://localhost:3001/persons')      
+      .get('http://localhost:3001/api/persons')      
       .then(response => {        
         console.log('promise fulfilled')        
         setPersons(response.data)      
