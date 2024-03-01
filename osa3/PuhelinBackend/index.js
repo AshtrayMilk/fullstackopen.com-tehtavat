@@ -61,18 +61,31 @@ app.get('/api/persons', (request, response) => {
 })
 
 app.get('/api/persons/:id', (request, response) => {
-  database.getPersonWithId(id).then((person) => {
+  const id = request.params.id
+  database.getPersonWithId(id)
+  .then((person) => {
     console.log("resolved getting one person")
     console.log(person)
     response.json(person)
   })
+  .catch(error => {
+    console.log(error)
+    response.status(400).send({error: "id not found"})
+  })
 })
 
 app.delete('/api/persons/:id', (request, response) => {
-  const id = Number(request.params.id)
-  persons = persons.filter(person => person.id !== id)
-
-  response.status(204).end()
+  const id = request.params
+  database.deletePerson(id)
+  .then((person) => {
+    console.log("resolved deleting one person")
+    console.log(person)
+    response.json(person)
+  })
+  .catch(error => {
+    console.log(error)
+    response.status(404).send({error: "id not found"})
+  })
 })
 
 app.post('/api/persons', (request, response) => {
