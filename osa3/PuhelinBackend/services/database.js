@@ -34,7 +34,7 @@ const getPersonWithId = (id) => {
 
     let gettingPeople = new Promise((resolve, reject) => {
         let foundPerson = {}
-        Person.find({})
+        Person.find({_id: id})
         .then(result => {
             result.forEach(person => {
                 console.log(person.id, id)
@@ -65,30 +65,40 @@ const addPerson = (name, number) => {
     })
     person.save().then(result => {
         console.log('person saved!')
+        console.log("result", result)
+        return result;
     })
 }
 
 const deletePerson = (id) =>{
-    let deletedPerson = new Promise((resolve, reject) => {
-        let person = {}
+    
+    let gettingPeople = new Promise((resolve, reject) => {
+        let foundPerson = {}
         Person.find({_id: id})
         .then(result => {
-            person = result
-            console.log("result", result)
-            Person.deleteOne({_id: id})
-            .then( result =>{
-                if(Object.keys(person).length !== 0 ){
-                    console.log("Person with given id was deleted")
-                    resolve(person) 
+            result.forEach(person => {
+                console.log(person.id, id)
+                if(person.id == id){
+                    foundPerson = person
+                    resolve(foundPerson)
                 }
-                else{
-                    console.log("Person with given id was not found")
-                    reject(person)
-                } 
-        })
+            })
+            //console.log(foundPerson)
+            if(Object.keys(foundPerson).length !== 0 ){
+                console.log("Person with given id was found")
+                Person.deleteOne({_id: id})
+                .then(result => {
+                    console.log("successfully deleted one person")
+                })
+                resolve(foundPerson) 
+            }
+            else{
+                reject("Person with given id was not found")
+            }
+            
         })
     })
-    return deletedPerson
+    return gettingPeople
 }
 const closeConnection = () => {
     mongoose.connection.close()

@@ -75,7 +75,8 @@ app.get('/api/persons/:id', (request, response) => {
 })
 
 app.delete('/api/persons/:id', (request, response) => {
-  const id = request.params
+  const id = request.params.id
+  console.log("trying to delete one person")
   database.deletePerson(id)
   .then((person) => {
     console.log("resolved deleting one person")
@@ -96,21 +97,9 @@ app.post('/api/persons', (request, response) => {
       error: "Name or phone number is missing"
     })
   }
-  const person = {
-    name: body.name,
-    number: body.number,
-    id: generateId(),
-  }
-  if(isNameAlreadyOnPersons(body.name.toLowerCase())){
-    return response.status(400).json({
-      error: "Name already exists on contacts"
-    })
-  }else{
-    persons = persons.concat(person)
-
-    response.json(person)
-  }
-  
+  database.addPerson(body.name, body.number).then((person) =>{
+    console.log(person)
+  })
 })
 
 
