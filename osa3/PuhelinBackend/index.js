@@ -1,7 +1,7 @@
 const express = require("express")
 const morgan = require("morgan")
 const cors = require("cors")
-const database = require("./services/mongoose")
+const database = require("./services/database")
 const app = express()
 const PORT = 3001
 
@@ -52,17 +52,20 @@ const isNameAlreadyOnPersons = (newName) => {
 
 
 app.get('/api/persons', (request, response) => {
+
+  database.getAllPersons().then((persons) =>{
+    console.log("resolved getting multiple persons")
+    console.log(persons)
     response.json(persons)
+  })
 })
 
 app.get('/api/persons/:id', (request, response) => {
-  const id = Number(request.params.id)
-  const person = persons.find(person => person.id === id)
-  if (person) {
-      response.json(person)
-  }else{
-      response.status(404).end()
-  }
+  database.getPersonWithId(id).then((person) => {
+    console.log("resolved getting one person")
+    console.log(person)
+    response.json(person)
+  })
 })
 
 app.delete('/api/persons/:id', (request, response) => {
