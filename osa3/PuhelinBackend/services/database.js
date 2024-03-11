@@ -10,7 +10,7 @@ const personSchema = new mongoose.Schema({
     name: String,
     number: String,
 })
-const Person = mongoose.model('Person', personSchema)
+const Contact = mongoose.model('Contacts', personSchema)
 
 
 function getAllPersons() {
@@ -18,7 +18,7 @@ function getAllPersons() {
 
     let gettingPeople = new Promise((resolve, reject) => {
         let persons = []
-        Person.find({})
+        Contact.find({})
         .then(result => {
             result.forEach(person => {
                 persons.push(person)
@@ -34,7 +34,7 @@ const getPersonWithId = (id) => {
 
     let gettingPeople = new Promise((resolve, reject) => {
         let foundPerson = {}
-        Person.find({_id: id})
+        Contact.find({_id: id})
         .then(result => {
             result.forEach(person => {
                 console.log(person.id, id)
@@ -51,7 +51,6 @@ const getPersonWithId = (id) => {
             else{
                 reject("Person with given id was not found")
             }
-            
         })
     })
     return gettingPeople
@@ -59,7 +58,7 @@ const getPersonWithId = (id) => {
 
 const addPerson = (name, number) => {
     
-    const person = new Person({
+    const person = new Contact({
         name: name,
         number: number,
     })
@@ -74,7 +73,7 @@ const deletePerson = (id) =>{
     
     let gettingPeople = new Promise((resolve, reject) => {
         let foundPerson = {}
-        Person.find({_id: id})
+        Contact.find({_id: id})
         .then(result => {
             result.forEach(person => {
                 console.log(person.id, id)
@@ -86,7 +85,7 @@ const deletePerson = (id) =>{
             //console.log(foundPerson)
             if(Object.keys(foundPerson).length !== 0 ){
                 console.log("Person with given id was found")
-                Person.deleteOne({_id: id})
+                Contact.deleteOne({_id: id})
                 .then(result => {
                     console.log("successfully deleted one person")
                 })

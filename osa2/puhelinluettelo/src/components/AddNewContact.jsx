@@ -29,7 +29,7 @@ const AddNewContact = ({
         if(isAlreadyOnContacts){
             if(window.confirm(`${newName} already added to phonebook, replace the number with a new one?`)){
                 let contact = ({"name": newName, "number": newNumber })
-                let id = persons.filter(person => person["name"].toLowerCase() == newName.toLowerCase())[0].id
+                let id = persons.filter(person => person["name"].toLowerCase() == newName.toLowerCase())[0]["_id"]
                 console.log("id",id)
                 console.log("contact",contact)
 
@@ -37,7 +37,7 @@ const AddNewContact = ({
                     .updatePerson(id, contact)
                     .then(response => {
                         console.log("response", response)
-                        setPersons(persons.map(person => person.id !== id ? person : response))
+                        setPersons(persons.map(person => person["_id"] !== id ? person : response))
                         setNewName("")
                         setNewNumber("")
                 })

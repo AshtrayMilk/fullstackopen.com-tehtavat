@@ -76,6 +76,7 @@ app.get('/api/persons/:id', (request, response) => {
 
 app.delete('/api/persons/:id', (request, response) => {
   const id = request.params.id
+  console.log("id: ", id)
   console.log("trying to delete one person")
   database.deletePerson(id)
   .then((person) => {

@@ -11,23 +11,27 @@ const Numbers = ({searchNumber, persons, setPersons}) => {
             .deletePerson(target)
             .then(response => {
                 console.log("response", response)
-                setPersons(persons.filter(person => person.id != target))
+                setPersons(persons.filter(person => person["_id"] != target))
         })
         }
         
     } 
     console.log(foundPersons)
+    console.log("Doing next the id's")
     return (
         <div className='container'>
             <h1>Numbers</h1>
             <ul>
                 {
-                    foundPersons.map((person) =>
-                        <li key={person["id"]} className="note">
-                            {person["name"]} {person["number"]}
-                            <button onClick={() => deletePerson(person["id"])}>delete</button>
-                        </li>
-                    )
+                    foundPersons.map((person) => {
+                        console.log("id", person)
+                        return (
+                            <li key={person["_id"]} className="note">
+                                {person["name"]} {person["number"]}
+                                <button onClick={() => deletePerson(person["_id"])}>delete</button>
+                            </li>
+                        )
+                    })
                 }
             </ul> 
         </div>
